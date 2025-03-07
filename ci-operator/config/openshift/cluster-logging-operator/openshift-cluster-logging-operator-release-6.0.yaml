@@ -16,9 +16,9 @@ base_images:
     namespace: logging
     tag: logging-eventrouter
   logging-vector:
-    name: vector
+    name: "6.0"
     namespace: logging
-    tag: v0.37.1
+    tag: vector
   ocp_builder_rhel-9-golang-1.22-openshift-4.17:
     name: builder
     namespace: ocp

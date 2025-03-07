@@ -1,6 +1,6 @@
 periodics:
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 07 * * 2,4,6
   decorate: true
   decoration_config:
@@ -75,7 +75,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 01 * * 2,4,6
   decorate: true
   decoration_config:
@@ -150,11 +150,9 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 01 * * 2,4,6
   decorate: true
-  decoration_config:
-    timeout: 6h0m0s
   extra_refs:
   - base_ref: master
     org: openshift
@@ -225,7 +223,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 05 * * 2,4,6
   decorate: true
   decoration_config:
@@ -300,7 +298,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 03 * * 2,4,6
   decorate: true
   decoration_config:
@@ -375,7 +373,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 05 * * 1,4
   decorate: true
   decoration_config:
@@ -450,7 +448,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 01 * * 2,4,6
   decorate: true
   decoration_config:
@@ -525,7 +523,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 07 * * 2,4,6
   decorate: true
   decoration_config:
@@ -600,7 +598,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 05 * * 2,4,6
   decorate: true
   decoration_config:
@@ -675,7 +673,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 03 * * 2,4,6
   decorate: true
   decoration_config:
@@ -750,7 +748,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 42 22 * * *
   decorate: true
   extra_refs:
@@ -811,7 +809,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 24 22 * * *
   decorate: true
   extra_refs:
@@ -872,7 +870,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 00 * * 0-5
   decorate: true
   extra_refs:
@@ -940,7 +938,7 @@ periodics:
       secret:
         secretName: result-aggregator
 - agent: kubernetes
-  cluster: build09
+  cluster: build10
   cron: 00 01 * * 0-5
   decorate: true
   extra_refs:

@@ -28,8 +28,6 @@ resources:
 test_binary_build_commands: job --help
 tests:
 - as: oar-check
-  capabilities:
-  - arm64
   commands: |
     oar --help
     oarctl --help
@@ -37,8 +35,6 @@ tests:
     from: oar
   optional: true
 - as: qe-release-gate-test
-  capabilities:
-  - arm64
   cron: 15 * * * *
   steps:
     env:

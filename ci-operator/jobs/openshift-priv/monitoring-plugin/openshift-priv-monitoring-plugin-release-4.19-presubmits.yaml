@@ -5,13 +5,11 @@ presubmits:
     branches:
     - ^release-4\.19$
     - ^release-4\.19-
-    cluster: build09
+    cluster: build10
     context: ci/prow/e2e-aws-ovn
     decorate: true
     decoration_config:
-      oauth_token_secret:
-        key: oauth
-        name: github-credentials-openshift-ci-robot-private-git-cloner
+      skip_cloning: true
     hidden: true
     labels:
       ci-operator.openshift.io/cloud: aws
@@ -72,6 +70,9 @@ presubmits:
       - name: ci-pull-credentials
         secret:
           secretName: ci-pull-credentials
+      - name: github-credentials-openshift-ci-robot-private-git-cloner
+        secret:
+          secretName: github-credentials-openshift-ci-robot-private-git-cloner
       - name: manifest-tool-local-pusher
         secret:
           secretName: manifest-tool-local-pusher
@@ -87,13 +88,11 @@ presubmits:
     branches:
     - ^release-4\.19$
     - ^release-4\.19-
-    cluster: build09
+    cluster: build10
     context: ci/prow/e2e-aws-ovn-upgrade
     decorate: true
     decoration_config:
-      oauth_token_secret:
-        key: oauth
-        name: github-credentials-openshift-ci-robot-private-git-cloner
+      skip_cloning: true
     hidden: true
     labels:
       ci-operator.openshift.io/cloud: aws
@@ -154,6 +153,9 @@ presubmits:
       - name: ci-pull-credentials
         secret:
           secretName: ci-pull-credentials
+      - name: github-credentials-openshift-ci-robot-private-git-cloner
+        secret:
+          secretName: github-credentials-openshift-ci-robot-private-git-cloner
       - name: manifest-tool-local-pusher
         secret:
           secretName: manifest-tool-local-pusher
@@ -173,9 +175,7 @@ presubmits:
     context: ci/prow/e2e-hypershift-conformance
     decorate: true
     decoration_config:
-      oauth_token_secret:
-        key: oauth
-        name: github-credentials-openshift-ci-robot-private-git-cloner
+      skip_cloning: true
     hidden: true
     labels:
       ci-operator.openshift.io/cloud: hypershift
@@ -183,7 +183,6 @@ presubmits:
       ci.openshift.io/generator: prowgen
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
     name: pull-ci-openshift-priv-monitoring-plugin-release-4.19-e2e-hypershift-conformance
-    optional: true
     path_alias: github.com/openshift/monitoring-plugin
     rerun_command: /test e2e-hypershift-conformance
     spec:
@@ -237,6 +236,9 @@ presubmits:
       - name: ci-pull-credentials
         secret:
           secretName: ci-pull-credentials
+      - name: github-credentials-openshift-ci-robot-private-git-cloner
+        secret:
+          secretName: github-credentials-openshift-ci-robot-private-git-cloner
       - name: manifest-tool-local-pusher
         secret:
           secretName: manifest-tool-local-pusher
@@ -256,9 +258,7 @@ presubmits:
     context: ci/prow/images
     decorate: true
     decoration_config:
-      oauth_token_secret:
-        key: oauth
-        name: github-credentials-openshift-ci-robot-private-git-cloner
+      skip_cloning: true
     hidden: true
     labels:
       ci.openshift.io/generator: prowgen
@@ -300,6 +300,9 @@ presubmits:
           readOnly: true
       serviceAccountName: ci-operator
       volumes:
+      - name: github-credentials-openshift-ci-robot-private-git-cloner
+        secret:
+          secretName: github-credentials-openshift-ci-robot-private-git-cloner
       - name: manifest-tool-local-pusher
         secret:
           secretName: manifest-tool-local-pusher
@@ -319,9 +322,7 @@ presubmits:
     context: ci/prow/lint
     decorate: true
     decoration_config:
-      oauth_token_secret:
-        key: oauth
-        name: github-credentials-openshift-ci-robot-private-git-cloner
+      skip_cloning: true
     hidden: true
     labels:
       ci.openshift.io/generator: prowgen
@@ -363,6 +364,9 @@ presubmits:
           readOnly: true
       serviceAccountName: ci-operator
       volumes:
+      - name: github-credentials-openshift-ci-robot-private-git-cloner
+        secret:
+          secretName: github-credentials-openshift-ci-robot-private-git-cloner
       - name: manifest-tool-local-pusher
         secret:
           secretName: manifest-tool-local-pusher

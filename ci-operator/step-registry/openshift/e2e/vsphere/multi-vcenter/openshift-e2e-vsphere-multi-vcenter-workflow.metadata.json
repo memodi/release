@@ -2,8 +2,7 @@
 	"path": "openshift/e2e/vsphere/multi-vcenter/openshift-e2e-vsphere-multi-vcenter-workflow.yaml",
 	"owners": {
 		"approvers": [
-			"vsphere-approvers",
-			"storage-approvers"
+			"vsphere-approvers"
 		]
 	}
 }

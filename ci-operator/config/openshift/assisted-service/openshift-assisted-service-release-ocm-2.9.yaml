@@ -350,7 +350,6 @@ tests:
     env:
       PACKET_PLAN: c3.medium.x86
     workflow: assisted-baremetal-operator-ztp
-  timeout: 6h0m0s
 - as: e2e-ai-operator-ztp-periodic
   cron: 00 00 * * 2
   steps:
@@ -362,8 +361,8 @@ tests:
       PACKET_PLAN: c3.medium.x86
     workflow: assisted-baremetal-operator-ztp
   timeout: 6h0m0s
-- always_run: false
-  as: e2e-ai-operator-ztp-3masters
+- as: e2e-ai-operator-ztp-3masters
+  run_if_changed: ^(deploy/operator/.*)$
   steps:
     cluster_profile: packet-assisted
     dependencies:
@@ -399,7 +398,6 @@ tests:
       DISCONNECTED: "true"
       IP_STACK: v6
     workflow: assisted-baremetal-operator-ztp
-  timeout: 6h0m0s
 - as: e2e-ai-operator-ztp-disconnected-periodic
   cron: 00 02 * * 2
   steps:
@@ -584,7 +582,6 @@ tests:
       OPENSHIFT_INSTALL_RELEASE_IMAGE: release:latest
       PROVIDER_IMAGE: cluster-api-provider-agent
     workflow: assisted-baremetal-operator-capi
-  timeout: 6h0m0s
 - as: e2e-ai-operator-ztp-capi-periodic
   cron: 00 06 * * 2
   steps:
@@ -612,7 +609,6 @@ tests:
       DISCONNECTED: "true"
       IP_STACK: v6
     workflow: assisted-baremetal-operator-capi
-  timeout: 6h0m0s
 - as: e2e-ai-operator-disconnected-capi-periodic
   cron: 00 14 * * 2
   steps:
@@ -643,7 +639,6 @@ tests:
         SPOKE_CONTROLPLANE_AGENTS=3
       NUM_EXTRA_WORKERS: "3"
     workflow: assisted-baremetal-operator-ztp
-  timeout: 6h0m0s
 - always_run: false
   as: e2e-ai-operator-ztp-multiarch-sno
   optional: true
@@ -657,7 +652,6 @@ tests:
         SPOKE_CONTROLPLANE_AGENTS=1
       NUM_EXTRA_WORKERS: "1"
     workflow: assisted-baremetal-operator-ztp
-  timeout: 6h0m0s
 - always_run: false
   as: e2e-ai-operator-ztp-hypershift-zero-nodes
   optional: true
@@ -668,7 +662,6 @@ tests:
       HYPERSHIFT_IMAGE: hypershift-operator
       OPENSHIFT_INSTALL_RELEASE_IMAGE: release:latest
     workflow: assisted-baremetal-operator-hypershift
-  timeout: 6h0m0s
 - as: e2e-ai-operator-ztp-remove-node-periodic
   cron: 00 07 * * 2
   steps:

@@ -343,7 +343,7 @@ tests:
       LOKI_ENABLED: "false"
       OCP_VERSION: "4.14"
       RESOURCE_GROUP: multi-arch-cicd-resource-group
-      SIZE_VARIANT: compact
+      SIZE_VARIANT: large
       TERRAFORM_VERSION: 1.5.5
       TEST_SKIPS: deploymentconfigs\| should expose cluster services outside the cluster\|
         FIPS TestFIPS\| Multi-stage image builds should succeed\| Optimized image
@@ -388,8 +388,7 @@ tests:
       TEST_SUITE: upgrade-conformance
     workflow: openshift-upgrade-azure
 - as: ocp-e2e-ovn-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 18 * * 1,4
   steps:
     cluster_profile: libvirt-s390x-2
@@ -402,8 +401,7 @@ tests:
       TEST_TYPE: conformance-parallel
     workflow: openshift-e2e-libvirt
 - as: ocp-heavy-build-ovn-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 18 * * 3
   steps:
     cluster_profile: libvirt-s390x-2
@@ -416,8 +414,7 @@ tests:
       TEST_TYPE: heavy-build
     workflow: openshift-e2e-libvirt
 - as: ocp-image-ecosystem-ovn-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 12 * * 0
   steps:
     cluster_profile: libvirt-s390x-2
@@ -429,8 +426,7 @@ tests:
       TEST_TYPE: image-ecosystem
     workflow: openshift-e2e-libvirt
 - as: ocp-jenkins-e2e-ovn-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 13 * * 0
   steps:
     cluster_profile: libvirt-s390x-2
@@ -442,8 +438,7 @@ tests:
       TEST_TYPE: jenkins-e2e-rhel-only
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-serial-ovn-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 12 * * 6
   steps:
     cluster_profile: libvirt-s390x-2
@@ -455,8 +450,7 @@ tests:
       TEST_TYPE: conformance-serial
     workflow: openshift-e2e-libvirt
 - as: ocp-fips-ovn-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 13 * * 6
   steps:
     cluster_profile: libvirt-s390x-2
@@ -470,8 +464,7 @@ tests:
       TEST_TYPE: conformance-parallel
     workflow: openshift-e2e-libvirt-fips
 - as: ocp-e2e-compact-ovn-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 14 * * 6
   steps:
     cluster_profile: libvirt-s390x-2
@@ -488,8 +481,7 @@ tests:
       WORKER_REPLICAS: "0"
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-ovn-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 18 * * 1,4
   steps:
     cluster_profile: libvirt-ppc64le
@@ -503,8 +495,7 @@ tests:
       USE_RAMFS: "true"
     workflow: openshift-e2e-libvirt
 - as: ocp-heavy-build-ovn-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 18 * * 3
   steps:
     cluster_profile: libvirt-ppc64le
@@ -518,8 +509,7 @@ tests:
       USE_RAMFS: "true"
     workflow: openshift-e2e-libvirt
 - as: ocp-image-ecosystem-ovn-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 12 * * 0
   steps:
     cluster_profile: libvirt-ppc64le
@@ -531,8 +521,7 @@ tests:
       TEST_TYPE: image-ecosystem
     workflow: openshift-e2e-libvirt
 - as: ocp-jenkins-e2e-ovn-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 13 * * 0
   steps:
     cluster_profile: libvirt-ppc64le
@@ -544,8 +533,7 @@ tests:
       TEST_TYPE: jenkins-e2e-rhel-only
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-serial-ovn-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 12 * * 6
   steps:
     cluster_profile: libvirt-ppc64le
@@ -557,8 +545,7 @@ tests:
       TEST_TYPE: conformance-serial
     workflow: openshift-e2e-libvirt
 - as: ocp-fips-ovn-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 13 * * 6
   steps:
     cluster_profile: libvirt-ppc64le
@@ -571,8 +558,7 @@ tests:
       TEST_TYPE: conformance-parallel
     workflow: openshift-e2e-libvirt-fips
 - as: ocp-e2e-compact-ovn-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 14 * * 6
   steps:
     cluster_profile: libvirt-ppc64le
@@ -589,8 +575,7 @@ tests:
       WORKER_REPLICAS: "0"
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-ovn-ppc64le-powervs
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 10 * * *
   steps:
     cluster_profile: powervs-2
@@ -603,8 +588,7 @@ tests:
       TEST_TYPE: conformance-parallel
     workflow: openshift-e2e-powervs-ipi
 - as: ocp-e2e-serial-ovn-ppc64le-powervs
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 1,7 * * *
   steps:
     cluster_profile: powervs-2

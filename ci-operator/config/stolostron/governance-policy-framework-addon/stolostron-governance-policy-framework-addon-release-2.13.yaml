@@ -20,7 +20,8 @@ images:
   to: governance-policy-framework-addon
 promotion:
   to:
-  - name: "2.13"
+  - disabled: true
+    name: "2.13"
     namespace: stolostron
 resources:
   '*':

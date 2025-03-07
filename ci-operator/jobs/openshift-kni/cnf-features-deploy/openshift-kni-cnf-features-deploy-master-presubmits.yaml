@@ -1,7 +1,7 @@
 presubmits:
   openshift-kni/cnf-features-deploy:
   - agent: kubernetes
-    always_run: false
+    always_run: true
     branches:
     - ^master$
     - ^master-
@@ -16,7 +16,6 @@ presubmits:
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
     name: pull-ci-openshift-kni-cnf-features-deploy-master-ci
     rerun_command: /test ci
-    skip_if_only_changed: \.tekton/.*
     spec:
       containers:
       - args:
@@ -75,7 +74,7 @@ presubmits:
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
     name: pull-ci-openshift-kni-cnf-features-deploy-master-e2e-aws-ci-tests
     rerun_command: /test e2e-aws-ci-tests
-    skip_if_only_changed: ^ztp|\.tekton/.*
+    skip_if_only_changed: ^ztp
     spec:
       containers:
       - args:
@@ -134,7 +133,7 @@ presubmits:
           secretName: result-aggregator
     trigger: (?m)^/test( | .* )e2e-aws-ci-tests,?($|\s.*)
   - agent: kubernetes
-    always_run: false
+    always_run: true
     branches:
     - ^master$
     - ^master-
@@ -152,7 +151,6 @@ presubmits:
     name: pull-ci-openshift-kni-cnf-features-deploy-master-e2e-aws-ran-profile
     optional: true
     rerun_command: /test e2e-aws-ran-profile
-    skip_if_only_changed: \.tekton/.*
     spec:
       containers:
       - args:
@@ -229,7 +227,6 @@ presubmits:
     name: pull-ci-openshift-kni-cnf-features-deploy-master-e2e-telco5g-cnftests
     optional: true
     rerun_command: /test e2e-telco5g-cnftests
-    skip_if_only_changed: \.tekton/.*
     spec:
       containers:
       - args:
@@ -295,7 +292,6 @@ presubmits:
     name: pull-ci-openshift-kni-cnf-features-deploy-master-e2e-telco5g-hcp-cnftests
     optional: true
     rerun_command: /test e2e-telco5g-hcp-cnftests
-    skip_if_only_changed: \.tekton/.*
     spec:
       containers:
       - args:
@@ -361,7 +357,6 @@ presubmits:
     name: pull-ci-openshift-kni-cnf-features-deploy-master-e2e-telco5g-sno-cnftests
     optional: true
     rerun_command: /test e2e-telco5g-sno-cnftests
-    skip_if_only_changed: \.tekton/.*
     spec:
       containers:
       - args:
@@ -410,7 +405,7 @@ presubmits:
           secretName: result-aggregator
     trigger: (?m)^/test( | .* )e2e-telco5g-sno-cnftests,?($|\s.*)
   - agent: kubernetes
-    always_run: false
+    always_run: true
     branches:
     - ^master$
     - ^master-
@@ -425,7 +420,6 @@ presubmits:
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
     name: pull-ci-openshift-kni-cnf-features-deploy-master-images
     rerun_command: /test images
-    skip_if_only_changed: \.tekton/.*
     spec:
       containers:
       - args:
@@ -483,7 +477,7 @@ presubmits:
     name: pull-ci-openshift-kni-cnf-features-deploy-master-security
     optional: true
     rerun_command: /test security
-    skip_if_only_changed: \.tekton/.*|^test/|^hack/|^scripts/|^bin/|\.md$|^(?:.*/)?(?:\.gitignore|OWNERS|LICENSE)$
+    skip_if_only_changed: ^test/|^hack/|^scripts/|^bin/|\.md$|^(?:.*/)?(?:\.gitignore|OWNERS|LICENSE)$
     spec:
       containers:
       - args:

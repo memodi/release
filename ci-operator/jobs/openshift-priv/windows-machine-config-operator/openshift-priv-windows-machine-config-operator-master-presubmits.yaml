@@ -21,7 +21,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-aws-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test aws-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -82,7 +82,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )aws-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(aws-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -104,7 +104,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-azure-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test azure-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -165,7 +165,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )azure-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(azure-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -188,7 +188,6 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-azure-e2e-upgrade
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test azure-e2e-upgrade
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
     spec:
       containers:
       - args:
@@ -249,7 +248,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )azure-e2e-upgrade,?($|\s.*)
+    trigger: (?m)^/test( | .* )(azure-e2e-upgrade|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -269,7 +268,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-build
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test build
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -398,7 +397,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-gcp-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test gcp-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -459,7 +458,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )gcp-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(gcp-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: true
     branches:
@@ -543,7 +542,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-lint
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test lint
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -600,7 +599,6 @@ presubmits:
       oauth_token_secret:
         key: oauth
         name: github-credentials-openshift-ci-robot-private-git-cloner
-      timeout: 5h0m0s
     hidden: true
     labels:
       ci-operator.openshift.io/cloud: nutanix
@@ -611,7 +609,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-nutanix-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test nutanix-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -672,7 +670,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )nutanix-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(nutanix-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -694,7 +692,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-platform-none-vsphere-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test platform-none-vsphere-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -755,7 +753,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )platform-none-vsphere-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(platform-none-vsphere-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -775,7 +773,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-security
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test security
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -846,7 +844,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-unit
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test unit
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -912,7 +910,6 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-vsphere-disconnected-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test vsphere-disconnected-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
     spec:
       containers:
       - args:
@@ -973,7 +970,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )vsphere-disconnected-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(vsphere-disconnected-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -995,7 +992,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-vsphere-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test vsphere-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -1056,7 +1053,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )vsphere-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(vsphere-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -1078,7 +1075,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-vsphere-proxy-e2e-operator
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test vsphere-proxy-e2e-operator
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -1139,7 +1136,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )vsphere-proxy-e2e-operator,?($|\s.*)
+    trigger: (?m)^/test( | .* )(vsphere-proxy-e2e-operator|remaining-required),?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -1161,7 +1158,7 @@ presubmits:
     name: pull-ci-openshift-priv-windows-machine-config-operator-master-wicd-unit-vsphere
     path_alias: github.com/openshift/windows-machine-config-operator
     rerun_command: /test wicd-unit-vsphere
-    skip_if_only_changed: ^(?:docs|\.github|\.tekton)/|\.md$|^(?:\.gitignore|renovate\.json|OWNERS|PROJECT|LICENSE|Containerfile|Containerfile.bundle)$
+    skip_if_only_changed: ^(?:docs|\.github)/|\.md$|^(?:\.gitignore|OWNERS|PROJECT|LICENSE)$
     spec:
       containers:
       - args:
@@ -1222,4 +1219,4 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )wicd-unit-vsphere,?($|\s.*)
+    trigger: (?m)^/test( | .* )(wicd-unit-vsphere|remaining-required),?($|\s.*)

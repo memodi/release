@@ -20,7 +20,8 @@ images:
   to: governance-policy-propagator
 promotion:
   to:
-  - name: "2.13"
+  - disabled: true
+    name: "2.13"
     namespace: stolostron
 resources:
   '*':

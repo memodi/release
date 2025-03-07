@@ -42,40 +42,60 @@
         "name": "periodic-ci-openshift-release-master-nightly-4.18-e2e-agent-single-node-ipv6"
       }
     },
-    "aws-ovn-upgrade-4.18-micro": {
+    "aggregated-aws-ovn-upgrade-4.18-micro": {
+      "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-ci-4.18-e2e-aws-ovn-upgrade"
       },
       "upgrade": true,
-      "maxRetries": 2
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
-    "azure-ovn-upgrade-4.18-micro": {
+    "aggregated-azure-ovn-upgrade-4.18-micro": {
+      "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-ci-4.18-e2e-azure-ovn-upgrade"
       },
       "upgrade": true,
-      "maxRetries": 2
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
-    "gcp-ovn-rt-upgrade-4.18-minor": {
+    "aggregated-gcp-ovn-rt-upgrade-4.18-minor": {
+      "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-ci-4.18-upgrade-from-stable-4.17-e2e-gcp-ovn-rt-upgrade"
       },
       "upgrade": true,
-      "upgradeFrom": "PreviousMinor",
-      "maxRetries": 2
+      "upgradeFromRelease": {
+        "candidate": {
+          "stream": "nightly",
+          "version": "4.17"
+        }
+      },
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
-    "hypershift-ovn-conformance-4.18": {
+    "aggregated-hypershift-ovn-conformance-4.18": {
+      "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-hypershift-release-4.18-periodics-e2e-aws-ovn-conformance"
       },
-      "maxRetries": 2
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
-    "aws-ovn-single-node-upgrade-4.18-micro": {
+    "aggregated-aws-ovn-single-node-upgrade-4.18-micro": {
+      "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-ci-4.18-e2e-aws-upgrade-ovn-single-node"
       },
       "upgrade": true,
-      "maxRetries": 2
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
     "aws-console": {
       "optional": true,
@@ -479,7 +499,7 @@
     "qe-perfscale": {
       "optional": true,
       "prowJob": {
-        "name": "periodic-ci-openshift-eng-ocp-qe-perfscale-ci-main-aws-4.18-nightly-x86-payload-control-plane-6nodes"
+        "name": "periodic-ci-openshift-qe-ocp-qe-perfscale-ci-main-aws-4.18-nightly-x86-payload-control-plane-6nodes"
       }
     },
     "rosa-classic-sts-osde2e": {
@@ -504,12 +524,6 @@
       "optional": true,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-nightly-4.18-e2e-telco5g"
-      }
-    },
-    "telcov10n-metal-single-node-spoke": {
-      "optional": true,
-      "prowJob": {
-        "name": "periodic-ci-openshift-kni-eco-ci-cd-main-nightly-4.18-telcov10n-metal-single-node-spoke"
       }
     },
     "upgrade-minor-ovn": {
@@ -556,10 +570,10 @@
       },
       "upgrade": true,
       "upgradeFromRelease": {
-        "candidate": {
-          "stream": "nightly",
-          "version": "4.17"
-        }
+          "candidate": {
+              "stream": "nightly",
+              "version": "4.17"
+          }
       }
     },
     "vsphere-ovn-upgrade-micro": {

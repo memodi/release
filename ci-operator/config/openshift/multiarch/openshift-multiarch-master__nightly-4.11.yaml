@@ -302,8 +302,7 @@ tests:
       OCP_ARCH: arm64
     workflow: openshift-e2e-aws-techpreview-serial
 - as: ocp-e2e-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 18 12 *
   steps:
     cluster_profile: libvirt-s390x-2
@@ -316,8 +315,7 @@ tests:
       TEST_TYPE: conformance-parallel
     workflow: openshift-e2e-libvirt
 - as: ocp-image-ecosystem-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 20 12 *
   steps:
     cluster_profile: libvirt-s390x-2
@@ -329,8 +327,7 @@ tests:
       TEST_TYPE: image-ecosystem
     workflow: openshift-e2e-libvirt
 - as: ocp-jenkins-e2e-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 21 12 *
   steps:
     cluster_profile: libvirt-s390x-2
@@ -342,8 +339,7 @@ tests:
       TEST_TYPE: jenkins-e2e-rhel-only
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-serial-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 22 12 *
   steps:
     cluster_profile: libvirt-s390x-2
@@ -355,8 +351,7 @@ tests:
       TEST_TYPE: conformance-serial
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-compact-remote-libvirt-s390x
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 23 12 *
   steps:
     cluster_profile: libvirt-s390x-2
@@ -373,8 +368,7 @@ tests:
       WORKER_REPLICAS: "0"
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 18 12 *
   steps:
     cluster_profile: libvirt-ppc64le
@@ -386,8 +380,7 @@ tests:
       TEST_TYPE: conformance-parallel
     workflow: openshift-e2e-libvirt
 - as: ocp-image-ecosystem-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 20 12 *
   steps:
     cluster_profile: libvirt-ppc64le
@@ -399,8 +392,7 @@ tests:
       TEST_TYPE: image-ecosystem
     workflow: openshift-e2e-libvirt
 - as: ocp-jenkins-e2e-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 21 12 *
   steps:
     cluster_profile: libvirt-ppc64le
@@ -412,8 +404,7 @@ tests:
       TEST_TYPE: jenkins-e2e-rhel-only
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-serial-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 22 12 *
   steps:
     cluster_profile: libvirt-ppc64le
@@ -425,8 +416,7 @@ tests:
       TEST_TYPE: conformance-serial
     workflow: openshift-e2e-libvirt
 - as: ocp-e2e-compact-remote-libvirt-ppc64le
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 0 23 12 *
   steps:
     cluster_profile: libvirt-ppc64le

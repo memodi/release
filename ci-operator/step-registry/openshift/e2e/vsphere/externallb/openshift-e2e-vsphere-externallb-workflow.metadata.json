@@ -2,8 +2,7 @@
 	"path": "openshift/e2e/vsphere/externallb/openshift-e2e-vsphere-externallb-workflow.yaml",
 	"owners": {
 		"approvers": [
-			"vsphere-approvers",
-			"storage-approvers"
+			"vsphere-approvers"
 		]
 	}
 }

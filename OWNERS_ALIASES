@@ -182,8 +182,6 @@ aliases:
   - RomanBednar
   - tsmetana
   - mpatlasov
-  - duanwei33
-  - Phaow
   storage-reviewers:
   - bertinatto
   - dobsonj
@@ -192,8 +190,6 @@ aliases:
   - RomanBednar
   - tsmetana
   - mpatlasov
-  - duanwei33
-  - Phaow
   powervs-approvers:
   - hamzy
   - clnperez
@@ -439,17 +435,3 @@ aliases:
   - jwendell
   - rcernich
   - dcillera
-  karpenter-approvers:
-  - elmiko
-  - enxebre
-  - jkyros
-  - joelsmith
-  - maxcao13
-  - muraee
-  karpenter-reviewers:
-  - elmiko
-  - enxebre
-  - jkyros
-  - joelsmith
-  - maxcao13
-  - muraee

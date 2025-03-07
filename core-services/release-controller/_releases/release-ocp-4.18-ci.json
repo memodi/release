@@ -16,28 +16,47 @@
     }
   },
   "verify": {
-    "aws-ovn-upgrade-4.18-minor": {
+    "aggregated-aws-ovn-upgrade-4.18-minor": {
       "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-ci-4.18-upgrade-from-stable-4.17-e2e-aws-ovn-upgrade"
       },
       "upgrade": true,
-      "upgradeFrom": "PreviousMinor"
+      "upgradeFromRelease": {
+        "candidate": {
+          "stream": "ci",
+          "version": "4.17"
+        }
+      },
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
-    "azure-ovn-upgrade-4.18-minor": {
+    "aggregated-azure-ovn-upgrade-4.18-minor": {
       "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-ci-4.18-upgrade-from-stable-4.17-e2e-azure-ovn-upgrade"
       },
       "upgrade": true,
-      "upgradeFrom": "PreviousMinor"
+      "upgradeFromRelease": {
+        "candidate": {
+          "stream": "ci",
+          "version": "4.17"
+        }
+      },
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
-    "gcp-ovn-upgrade-4.18-micro": {
+    "aggregated-gcp-ovn-upgrade-4.18-micro": {
       "maxRetries": 2,
       "prowJob": {
         "name": "periodic-ci-openshift-release-master-ci-4.18-e2e-gcp-ovn-upgrade"
       },
-      "upgrade": true
+      "upgrade": true,
+      "aggregatedProwJob": {
+        "analysisJobCount": 10
+      }
     },
     "hypershift-e2e": {
       "maxRetries": 3,

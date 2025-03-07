@@ -51,8 +51,6 @@ tests:
       ENABLE_FORCE: "true"
       GC: "false"
       MAX_UNAVAILABLE: "3"
-      USER_TAGS: |
-        TicketId 419
     observers:
       enable:
       - redhat-chaos-cerberus

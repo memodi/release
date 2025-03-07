@@ -61,6 +61,7 @@ metadata:
   labels:
     app: quayio-pull-through-cache-us-east-1
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: quayio-pull-through-cache-us-east-1

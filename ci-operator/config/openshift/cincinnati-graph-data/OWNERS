@@ -14,6 +14,7 @@ approvers:
 - hongkailiu
 - jewzaam
 - jharrington22
+- lalatendumohanty
 - petr-muller
 - pratikmahajan
 - rogbas
@@ -24,6 +25,7 @@ options: {}
 reviewers:
 - davidhurta
 - hongkailiu
+- lalatendumohanty
 - petr-muller
 - pratikmahajan
 - wking

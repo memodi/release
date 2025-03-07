@@ -335,10 +335,6 @@ EOF
 
 		mkdir -p ${dir}
 
-		echo "install-config.yaml"
-		echo "-------------------"
-		cat ${SHARED_DIR}/install-config.yaml | grep -vi "password\|username\|pullSecret\|auth"
-
 		# Make a copy of the install-config.yaml since the installer will consume it.
 		cp "${SHARED_DIR}/install-config.yaml" ${dir}/
 

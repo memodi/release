@@ -42,8 +42,6 @@ tests:
       BASE_DOMAIN: aws.rhperfscale.org
       SPOT_INSTANCES: "true"
       TELEMETRY_GROUP: prow-ocp-4.16
-      USER_TAGS: |
-        TicketId 419
     observers:
       enable:
       - redhat-chaos-cerberus
@@ -62,8 +60,6 @@ tests:
     env:
       BASE_DOMAIN: aws.rhperfscale.org
       SPOT_INSTANCES: "false"
-      USER_TAGS: |
-        TicketId 419
     post:
     - chain: ipi-aws-post
     pre:
@@ -78,8 +74,6 @@ tests:
     env:
       BASE_DOMAIN: aws.rhperfscale.org
       SPOT_INSTANCES: "false"
-      USER_TAGS: |
-        TicketId 419
     post:
     - chain: ipi-aws-post
     pre:

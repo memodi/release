@@ -39,7 +39,7 @@ releases:
 resources:
   '*':
     limits:
-      memory: 12Gi
+      memory: 6Gi
     requests:
       cpu: 100m
       memory: 300Mi

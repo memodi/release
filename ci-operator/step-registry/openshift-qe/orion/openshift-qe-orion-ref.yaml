@@ -38,10 +38,10 @@ ref:
     default: "false"
     documentation: |-
       Use to look at regressions over time
-  - name: OUTPUT_FORMAT
-    default: "TEXT"
+  - name: JUNIT
+    default: "false"
     documentation:
-      Export in desired output format
+      Export JUNIT output
   - name: VERSION
     default: ""
     documentation:
@@ -66,10 +66,6 @@ ref:
     default: ""
     documentation:
       Orion ack file name that has a list of acknowledged issues/regressions.
-  - name: COLLAPSE
-    default: "false"
-    documentation:
-      Flag to regulate displaying only changepoints vs the entire output.
   - name: ORION_ENVS
     default: ""
     documentation:

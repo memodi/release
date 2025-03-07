@@ -29,7 +29,6 @@ tests:
     cluster_profile: aws-perfscale-qe
     env:
       BASE_DOMAIN: qe.devcluster.openshift.com
-      COLLAPSE: "true"
       COMPUTE_NODE_REPLICAS: "3"
       COMPUTE_NODE_TYPE: m6i.xlarge
       ES_BENCHMARK_INDEX: ols-load-test-results*
@@ -43,7 +42,6 @@ tests:
       OPENSHIFT_INFRA_NODE_INSTANCE_TYPE: r5.xlarge
       ORION_CONFIG: examples/ols-load-generator.yaml
       ORION_ENVS: ols_test_workers=10
-      OUTPUT_FORMAT: JUNIT
       RUN_ORION: "true"
       VERSION: "4.15"
       ZONES_COUNT: "3"
@@ -58,7 +56,6 @@ tests:
     cluster_profile: aws-perfscale-qe
     env:
       BASE_DOMAIN: qe.devcluster.openshift.com
-      COLLAPSE: "true"
       COMPUTE_NODE_REPLICAS: "3"
       COMPUTE_NODE_TYPE: m6i.xlarge
       ES_BENCHMARK_INDEX: ols-load-test-results*
@@ -72,7 +69,6 @@ tests:
       OPENSHIFT_INFRA_NODE_INSTANCE_TYPE: r5.xlarge
       ORION_CONFIG: examples/ols-load-generator.yaml
       ORION_ENVS: ols_test_workers=25
-      OUTPUT_FORMAT: JUNIT
       RUN_ORION: "true"
       VERSION: "4.15"
       ZONES_COUNT: "3"
@@ -87,7 +83,6 @@ tests:
     cluster_profile: aws-perfscale-qe
     env:
       BASE_DOMAIN: qe.devcluster.openshift.com
-      COLLAPSE: "true"
       COMPUTE_NODE_REPLICAS: "3"
       COMPUTE_NODE_TYPE: m6i.xlarge
       ES_BENCHMARK_INDEX: ols-load-test-results*
@@ -101,7 +96,6 @@ tests:
       OPENSHIFT_INFRA_NODE_INSTANCE_TYPE: r5.xlarge
       ORION_CONFIG: examples/ols-load-generator.yaml
       ORION_ENVS: ols_test_workers=50
-      OUTPUT_FORMAT: JUNIT
       RUN_ORION: "true"
       VERSION: "4.15"
       ZONES_COUNT: "3"
@@ -116,7 +110,6 @@ tests:
     cluster_profile: aws-perfscale-qe
     env:
       BASE_DOMAIN: qe.devcluster.openshift.com
-      COLLAPSE: "true"
       COMPUTE_NODE_REPLICAS: "3"
       COMPUTE_NODE_TYPE: m6i.xlarge
       ES_BENCHMARK_INDEX: ols-load-test-results*
@@ -130,7 +123,6 @@ tests:
       OPENSHIFT_INFRA_NODE_INSTANCE_TYPE: r5.xlarge
       ORION_CONFIG: examples/ols-load-generator.yaml
       ORION_ENVS: ols_test_workers=100
-      OUTPUT_FORMAT: JUNIT
       RUN_ORION: "true"
       VERSION: "4.15"
       ZONES_COUNT: "3"
@@ -145,7 +137,6 @@ tests:
     cluster_profile: aws-perfscale-qe
     env:
       BASE_DOMAIN: qe.devcluster.openshift.com
-      COLLAPSE: "true"
       COMPUTE_NODE_REPLICAS: "3"
       COMPUTE_NODE_TYPE: m6i.xlarge
       ES_BENCHMARK_INDEX: ols-load-test-results*
@@ -159,7 +150,6 @@ tests:
       OPENSHIFT_INFRA_NODE_INSTANCE_TYPE: r5.xlarge
       ORION_CONFIG: examples/ols-load-generator.yaml
       ORION_ENVS: ols_test_workers=1000
-      OUTPUT_FORMAT: JUNIT
       RUN_ORION: "true"
       VERSION: "4.15"
       ZONES_COUNT: "3"

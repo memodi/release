@@ -132,9 +132,7 @@ trap copyArtifacts EXIT
 #yarn run cypress run --browser firefox --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --env grepTags=newui+-nopipeline || true
 #yarn run cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --env grepTags='newui --noprowci' || true
 
-export CYPRESS_NO_COMMAND_LOG=true
-NO_COLOR=1 yarn run cypress run -b chrome --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json
-#yarn run all_test  || true
+yarn run all_test  || true
 #yarn run org_test || true
 
 yarn run jrm  ./stage_quay_io_testing_report.xml ./cypress/results/stage_quay_io_testing_report-* || true

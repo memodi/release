@@ -18,8 +18,6 @@ images:
       yum install --setopt=tsflags=nodocs -y $PACKAGES && \
       yum install -y yum-utils && yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo && \
       yum -y install terraform && \
-      wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
-      yum install -y ./google-chrome-stable_current_x86_64.rpm && \
       yum clean all && rm -rf /var/cache/yum/*
   from: src
   to: stage-quay-io-test-console
@@ -33,10 +31,9 @@ releases:
 resources:
   '*':
     limits:
-      cpu: "8"
       memory: 8Gi
     requests:
-      cpu: "1"
+      cpu: 200m
       memory: 8Gi
 tests:
 - as: quay-e2e-tests-stage-quay-io

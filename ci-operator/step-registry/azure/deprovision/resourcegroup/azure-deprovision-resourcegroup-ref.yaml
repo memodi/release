@@ -15,4 +15,4 @@ ref:
       name: hypershift-ci-jobs-azurecreds
       namespace: test-credentials
   documentation: |-
-    Deprovision resource groups created outside installer
+    Deprovisions resource groups.

@@ -65,7 +65,7 @@ items:
     labels:
       app: quayio-pull-through-cache-gcs
   spec:
-    replicas: 0
+    replicas: 1
     selector:
       matchLabels:
         app: quayio-pull-through-cache-gcs

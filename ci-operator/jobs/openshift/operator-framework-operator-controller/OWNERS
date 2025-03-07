@@ -5,8 +5,10 @@
 # See the OWNERS docs: https://git.k8s.io/community/contributors/guide/owners.md
 
 approvers:
+- everettraven
 - grokspawn
 - joelanford
+- kevinrizza
 - lalatendumohanty
 - oceanc80
 - perdasilva
@@ -15,16 +17,12 @@ options: {}
 reviewers:
 - anik120
 - ankitathomas
-- azych
-- bentito
-- camilamacedo86
 - dtfranz
-- gallettilance
+- everettraven
 - grokspawn
 - joelanford
+- kevinrizza
 - lalatendumohanty
 - oceanc80
 - perdasilva
-- rashmigottipati
-- thetechnick
 - tmshort

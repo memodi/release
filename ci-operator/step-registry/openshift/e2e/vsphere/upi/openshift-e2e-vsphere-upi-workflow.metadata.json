@@ -2,8 +2,7 @@
 	"path": "openshift/e2e/vsphere/upi/openshift-e2e-vsphere-upi-workflow.yaml",
 	"owners": {
 		"approvers": [
-			"vsphere-approvers",
-			"storage-approvers"
+			"vsphere-approvers"
 		]
 	}
 }

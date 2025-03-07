@@ -143,8 +143,7 @@ tests:
       TEST_TYPE: upgrade-conformance
     workflow: openshift-upgrade-azure
 - as: ocp-ovn-remote-libvirt-multi-z-z
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 22 * * 2,5
   steps:
     cluster_profile: libvirt-s390x-1
@@ -159,8 +158,7 @@ tests:
       TEST_TYPE: upgrade
     workflow: openshift-e2e-libvirt-upi
 - as: ocp-ovn-remote-libvirt-multi-p-p
-  capabilities:
-  - sshd-bastion
+  cluster: build01
   cron: 0 22 * * 2,5
   steps:
     cluster_profile: libvirt-ppc64le

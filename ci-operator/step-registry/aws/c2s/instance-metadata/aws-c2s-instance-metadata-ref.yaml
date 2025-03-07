@@ -1,6 +1,7 @@
 ref:
   as: aws-c2s-instance-metadata
   from: upi-installer
+  cli: latest
   grace_period: 10m
   commands: aws-c2s-instance-metadata-commands.sh
   resources:

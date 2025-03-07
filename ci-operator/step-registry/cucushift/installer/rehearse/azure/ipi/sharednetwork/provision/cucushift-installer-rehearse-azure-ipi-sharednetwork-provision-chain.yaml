@@ -4,7 +4,6 @@ chain:
   - ref: azure-provision-resourcegroup
   - ref: azure-provision-vnet
   - chain: ipi-conf-azure-sharednetwork
-  - chain: azure-provision-service-principal-minimal-permission
   - chain: ipi-install
   - ref: enable-qe-catalogsource
   - chain: cucushift-installer-check

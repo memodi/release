@@ -121,14 +121,14 @@ tests:
   commands: make verify
   container:
     from: src
-  skip_if_only_changed: (^(\.tekton|\.github|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)|(/\.testcoverage\.yml$)
+  skip_if_only_changed: (^(\.tekton|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)
 - as: unit
   commands: make test
   container:
     from: src
-  skip_if_only_changed: (^(\.tekton|\.github|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)|(/\.testcoverage\.yml$)
+  skip_if_only_changed: (^(\.tekton|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)
 - as: e2e-aks
-  skip_if_only_changed: (^(\.tekton|\.github|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)|(/\.testcoverage\.yml$)
+  skip_if_only_changed: (^(\.tekton|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)
   steps:
     cluster_profile: hypershift
     dependencies:
@@ -137,6 +137,7 @@ tests:
     env:
       AUTH_THROUGH_CERTS: "true"
       ENABLE_HYPERSHIFT_CERT_ROTATION_SCALE: "true"
+      TECH_PREVIEW_NO_UPGRADE: "true"
     workflow: hypershift-azure-aks-e2e
 - as: e2e-aks-4-18
   run_if_changed: ^(test/e2e|hypershift-operator)
@@ -150,9 +151,10 @@ tests:
     env:
       AUTH_THROUGH_CERTS: "true"
       ENABLE_HYPERSHIFT_CERT_ROTATION_SCALE: "true"
+      TECH_PREVIEW_NO_UPGRADE: "true"
     workflow: hypershift-azure-aks-e2e
 - as: e2e-aws
-  skip_if_only_changed: (^(\.tekton|\.github|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)|(/\.testcoverage\.yml$)
+  skip_if_only_changed: (^(\.tekton|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)
   steps:
     cluster_profile: hypershift
     dependencies:
@@ -164,6 +166,7 @@ tests:
     workflow: hypershift-aws-e2e-external
 - as: e2e-aws-techpreview
   optional: true
+  skip_if_only_changed: (^(\.tekton|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)
   steps:
     cluster_profile: hypershift
     dependencies:
@@ -175,7 +178,7 @@ tests:
       TECH_PREVIEW_NO_UPGRADE: "true"
     workflow: hypershift-aws-e2e-external
 - as: e2e-aws-upgrade-hypershift-operator
-  skip_if_only_changed: (^(\.tekton|\.github|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)|(/\.testcoverage\.yml$)
+  skip_if_only_changed: (^(\.tekton|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)
   steps:
     cluster_profile: hypershift
     dependencies:
@@ -208,7 +211,7 @@ tests:
       REQUEST_SERVING_COMPONENT_TEST: "true"
     workflow: hypershift-aws-e2e-external
 - as: e2e-kubevirt-aws-ovn-reduced
-  skip_if_only_changed: (^(\.tekton|\.github|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)|(/\.testcoverage\.yml$)
+  skip_if_only_changed: (^(\.tekton|docs|examples|enhancements|contrib)/)|(^[A-Z]+\.md$)|((^|/)OWNERS$)|(/overrides\.yaml$)
   steps:
     cluster_profile: hypershift
     env:

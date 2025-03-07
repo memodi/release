@@ -100,9 +100,8 @@ function set_test_provider() {
 
 function run_mirror_release_image_for_disconnected_upgrade_ssh_commands() {
   # shellcheck disable=SC2087
-      ssh "${SSHOPTS[@]}" "root@${IP}" bash -ux - << EOF
-set -o pipefail
-
+      ssh "${SSHOPTS[@]}" "root@${IP}" bash -x - << EOF
+set -o errexit
 MIRRORED_RELEASE_IMAGE=${DS_REGISTRY}/localimages/local-upgrade-image
 DIGEST=\$(oc adm release info --registry-config ${DS_WORKING_DIR}/pull_secret.json ${OPENSHIFT_UPGRADE_RELEASE_IMAGE_OVERRIDE} --output=jsonpath="{.digest}")
 RELEASE_TAG=\$(sed -e "s/^sha256://" <<< \${DIGEST})
@@ -129,28 +128,11 @@ spec:
 \${UPGRADE_ICS}
 EOF1
 
-#Retry logic for the real release mirror command
-MAX_RETRIES=3
-CURRENT_RETRY=1
-SUCCESS=false
-while [ \$SUCCESS = false ] && [ \$CURRENT_RETRY -le \$MAX_RETRIES ]; do
-  echo "Mirroring release images for disconnected environment tentative \$CURRENT_RETRY"
-  \$MIRRORCOMMAND
-  if [ \$? -eq 0 ]; then
-    SUCCESS=true
-  else
-    echo "Mirroring release images for disconnected environment tentative \$CURRENT_RETRY failed. Trying again..."
-    CURRENT_RETRY=\$(( CURRENT_RETRY + 1 ))
-    sleep 5
-  fi
-done
+echo "Mirroring release images for disconnected environment"
+\$MIRRORCOMMAND
 
-if [ \$SUCCESS = true ]; then
-  echo "Mirroring release images for disconnected environment was successful after \$CURRENT_RETRY attempts."
-else
-  echo "Mirroring release images for disconnected environment failed after \$MAX_RETRIES attempts."
-  exit 1
-fi
+echo "Waiting for the new ImageContentSourcePolicy to be updated on machines"
+oc wait clusteroperators/machine-config --for=condition=Upgradeable=true --timeout=15m
 
 EOF
 }
@@ -159,7 +141,7 @@ function mirror_release_image_for_disconnected_upgrade() {
     # All IPv6 clusters are disconnected and
     # release image should be mirrored for upgrades.
     if [[ "${DS_IP_STACK}" == "v6" ]]; then
-      echo "### Mirroring release images for disconnected upgrade ###"
+      echo "### Mirroring release image for disconnected upgrade ###"
 
       MIRROR_RESULT=$(run_mirror_release_image_for_disconnected_upgrade_ssh_commands || echo "fail")
 
@@ -174,7 +156,7 @@ function mirror_release_image_for_disconnected_upgrade() {
     </testcase>
 </testsuite>
 EOF
-            echo "JUnit failing result written to ${JUNIT_IMAGE_FILE}"
+            echo "JUnit result written to $JUNIT_IMAGE_FILE"
             exit 1
         else
             cat > "$JUNIT_IMAGE_FILE" <<EOF
@@ -187,10 +169,7 @@ EOF
             echo "JUnit result written to $JUNIT_IMAGE_FILE"
         fi
 
-        echo "Waiting for the new ImageContentSourcePolicy to be updated on machines"
-        oc wait clusteroperators/machine-config --for=condition=Upgradeable=true --timeout=15m
-
-        TEST_UPGRADE_ARGS="--from-repository ${DS_REGISTRY}/localimages/local-test-image"
+      TEST_UPGRADE_ARGS="--from-repository ${DS_REGISTRY}/localimages/local-test-image"
     fi
 }
 

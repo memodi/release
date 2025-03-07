@@ -114,6 +114,7 @@ teams:
   - aliryan
   - jvaldes
   - mankulka
+  - mohashai
   - ssoto
   teamNames:
   - openshift-team-windows-containers
@@ -185,6 +186,7 @@ teams:
   channel: hcm-cicd-pr-reminders
   omitBots: true
 - teamMembers:
+  - adobes
   - asdas
   - dpaolell
   - jdelft
@@ -204,23 +206,3 @@ teams:
   - openshift-eng/art-docs
   - openshift-eng/art-tools
   - openshift-eng/ocp-build-data
-- teamMembers:
-  - sgoeddel
-  - dgoodwin
-  - kenzhang
-  - lmeyer
-  - fbabcock
-  - stbenjam
-  - jupierce
-  teamNames:
-  - openshift-release-oversight
-  repos:
-  - openshift/ci-tools
-  - openshift/ci-docs
-  - openshift/release
-  - openshift/origin
-  - openshift/sippy
-  - openshift/ci-search
-  - openshift/continuous-release-jobs
-  - openshift-eng/openshift-tests-extension
-  - openshift-eng/ci-test-mapping
