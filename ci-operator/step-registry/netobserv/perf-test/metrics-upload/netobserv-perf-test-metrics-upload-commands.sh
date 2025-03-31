@@ -2,7 +2,6 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-set -x
 
 
 ES_USERNAME=$(cat /secret/username)
@@ -67,6 +66,8 @@ function generate_metrics_sheet(){
     export COMPARISON_CONFIG="netobserv_touchstone_statistics_config.json"
     export ES_SERVER="https://$ES_USERNAME:$ES_PASSWORD@search-ocp-qe-perf-scale-test-elk-hcm7wtsqpxy7xogbu72bor4uve.us-east-1.es.amazonaws.com"
     export GEN_CSV=true
+    NETWORK_TYPE=$(oc get network.config/cluster -o jsonpath='{.spec.networkType}')
+    export NETWORK_TYPE
     pushd e2e-benchmarking/utils && source compare.sh
     # generate metrics sheet
     run_benchmark_comparison > "$ARTIFACT_DIR/benchmark_csv.log"
