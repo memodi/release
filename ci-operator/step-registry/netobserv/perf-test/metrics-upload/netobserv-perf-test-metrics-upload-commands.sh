@@ -68,6 +68,7 @@ function generate_metrics_sheet(){
     export GEN_CSV=true
     NETWORK_TYPE=$(oc get network.config/cluster -o jsonpath='{.spec.networkType}')
     export NETWORK_TYPE
+    export GEN_JSON=false
     pushd e2e-benchmarking/utils && source compare.sh
     # generate metrics sheet
     run_benchmark_comparison > "$ARTIFACT_DIR/benchmark_csv.log"
