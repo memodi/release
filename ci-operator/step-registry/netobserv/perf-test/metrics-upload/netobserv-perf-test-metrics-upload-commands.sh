@@ -62,8 +62,8 @@ function get_baseline(){
 
 function generate_metrics_sheet(){
     pushd /tmp
-    git clone -b main --depth=1 $E2E_BENCHMARKING_REPO_URL
-    export CONFIG_LOC="$PWD/scripts/queries"
+    git clone -b master --depth=1 $E2E_BENCHMARKING_REPO_URL
+    export CONFIG_LOC="/scripts/queries"
     export COMPARISON_CONFIG="netobserv_touchstone_statistics_config.json"
     export ES_SERVER="https://$ES_USERNAME:$ES_PASSWORD@search-ocp-qe-perf-scale-test-elk-hcm7wtsqpxy7xogbu72bor4uve.us-east-1.es.amazonaws.com"
     export GEN_CSV=true
@@ -81,10 +81,11 @@ function update_sheet(){
 
 function do_comparison(){
     pushd /tmp
-    export TOLERANCE_LOC="$PWD/scripts/queries"
+    export TOLERANCE_LOC="/scripts/queries"
     export TOLERANCY_RULES="netobserv_touchstone_tolerancy_rules.yaml"
     export COMPARISON_CONFIG="netobserv_touchstone_tolerancy_config.json"
     export ES_SERVER_BASELINE="https://$ES_USERNAME:$ES_PASSWORD@search-ocp-qe-perf-scale-test-elk-hcm7wtsqpxy7xogbu72bor4uve.us-east-1.es.amazonaws.com"
+    export GEN_CSV=true
     pushd e2e-benchmarking/utils && source compare.sh
     run_benchmark_comparison > "$ARTIFACT_DIR/benchmark_comp.log"
     # get the SHEET ID from the benchmark_comparison run logs
