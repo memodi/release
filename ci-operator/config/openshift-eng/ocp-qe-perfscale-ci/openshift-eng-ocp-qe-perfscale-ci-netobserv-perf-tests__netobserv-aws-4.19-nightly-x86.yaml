@@ -47,6 +47,14 @@ resources:
       cpu: 100m
       memory: 200Mi
 tests:
+- as: test-metrics-upload-step
+  steps:
+    env:
+      TIMEOUT: 10 min
+      WORKLOAD: node-density-heavy
+    test:
+    - ref: netobserv-perf-test-metrics-upload
+    - ref: wait
 - as: node-density-heavy-25nodes
   cron: '@weekly'
   steps:

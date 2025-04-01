@@ -11,26 +11,29 @@ ES_PASSWORD=$(cat /secret/password)
 export ES_PASSWORD
 export ES_USERNAME
 export GSHEET_KEY_LOCATION="/ga-gsheet/gcp-sa-account"
-export EMAIL_ID_FOR_RESULTS_SHEET="openshift-netobserv-team@redhat.com"
-NOO_BUNDLE_VERSION=$(jq '.noo_bundle_info' < "$SHARED_DIR/$WORKLOAD-index_data.json")
+export EMAIL_ID_FOR_RESULTS_SHEET="memodi@redhat.com"
+# NOO_BUNDLE_VERSION=$(jq '.noo_bundle_info' < "$SHARED_DIR/$WORKLOAD-index_data.json")
+NOO_BUNDLE_VERSION="v0.0.0-main" #debug-only
 export NOO_BUNDLE_VERSION
 
-UUID=$(jq '.uuid' < "$SHARED_DIR/$WORKLOAD-index_data.json")
-START_TIME=$(jq '.startDateUnixTimestamp' < "$SHARED_DIR/$WORKLOAD-index_data.json")
-END_TIME=$(jq '.endDateUnixTimestamp' < "$SHARED_DIR/$WORKLOAD-index_data.json")
+UUID="e7844924-6ac6-453f-804c-b3934cde9643"
 
-INGRESS_PERF_END_TIME=$(jq '.endDateUnixTimestamp' < "$SHARED_DIR/ingress-perf-index_data.json")
+# UUID=$(jq '.uuid' < "$SHARED_DIR/$WORKLOAD-index_data.json")
+# START_TIME=$(jq '.startDateUnixTimestamp' < "$SHARED_DIR/$WORKLOAD-index_data.json")
+# END_TIME=$(jq '.endDateUnixTimestamp' < "$SHARED_DIR/$WORKLOAD-index_data.json")
 
-# strip quotes
-UUID=${UUID//\"/}
-START_TIME=${START_TIME//\"/}
-END_TIME=${END_TIME//\"/}
-INGRESS_PERF_END_TIME=${INGRESS_PERF_END_TIME//\"/}
+# INGRESS_PERF_END_TIME=$(jq '.endDateUnixTimestamp' < "$SHARED_DIR/ingress-perf-index_data.json")
 
-# cluster-density-v2 takes longer to complete than ingress-perf
-if [[ $WORKLOAD == "node-density-heavy" ]]; then
-    END_TIME=$INGRESS_PERF_END_TIME
-fi
+# # strip quotes
+# UUID=${UUID//\"/}
+# START_TIME=${START_TIME//\"/}
+# END_TIME=${END_TIME//\"/}
+# INGRESS_PERF_END_TIME=${INGRESS_PERF_END_TIME//\"/}
+
+# # cluster-density-v2 takes longer to complete than ingress-perf
+# if [[ $WORKLOAD == "node-density-heavy" ]]; then
+#     END_TIME=$INGRESS_PERF_END_TIME
+# fi
 
 E2E_BENCHMARKING_REPO_URL="https://github.com/cloud-bulldozer/e2e-benchmarking"
 
@@ -67,8 +70,9 @@ function generate_metrics_sheet(){
     export CONFIG_LOC="/scripts/queries"
     export COMPARISON_CONFIG="netobserv_touchstone_statistics_config.json"
     export ES_SERVER="https://$ES_USERNAME:$ES_PASSWORD@search-ocp-qe-perf-scale-test-elk-hcm7wtsqpxy7xogbu72bor4uve.us-east-1.es.amazonaws.com"
-    NETWORK_TYPE=$(oc get network.config/cluster -o jsonpath='{.spec.networkType}')
-    export NETWORK_TYPE
+    # NETWORK_TYPE=$(oc get network.config/cluster -o jsonpath='{.spec.networkType}')
+    # export NETWORK_TYPE
+    export NETWORK_TYPE="OVNKubernetes"
     export TOLERANCY_RULES=""
     export ES_SERVER_BASELINE=""
     export GEN_JSON=false
@@ -99,7 +103,7 @@ function do_comparison(){
     update_sheet "$COMP_SHEET_ID"
 }
 
-upload_metrics
+# upload_metrics
 generate_metrics_sheet
 get_baseline
 do_comparison
