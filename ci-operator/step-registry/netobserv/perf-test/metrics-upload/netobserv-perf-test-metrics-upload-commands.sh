@@ -16,7 +16,8 @@ export EMAIL_ID_FOR_RESULTS_SHEET="memodi@redhat.com"
 NOO_BUNDLE_VERSION="v0.0.0-main" #debug-only
 export NOO_BUNDLE_VERSION
 
-UUID="e7844924-6ac6-453f-804c-b3934cde9643"
+export UUID="d933e616-9d78-49d6-ab50-bdcec9be76c1"
+export BASELINE_UUID="e7844924-6ac6-453f-804c-b3934cde9643"
 
 # UUID=$(jq '.uuid' < "$SHARED_DIR/$WORKLOAD-index_data.json")
 # START_TIME=$(jq '.startDateUnixTimestamp' < "$SHARED_DIR/$WORKLOAD-index_data.json")
@@ -105,6 +106,6 @@ function do_comparison(){
 
 # upload_metrics
 generate_metrics_sheet
-get_baseline
+# get_baseline
 do_comparison
 update_sheet
