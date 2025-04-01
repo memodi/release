@@ -4,6 +4,7 @@ set -o pipefail
 # disable nounset as e2e-benchmarking needs several variables to be set,
 # and we're selectively setting variables to get comparison sheets.
 set +o nounset
+set -x
 
 
 ES_USERNAME=$(cat /secret/username)
@@ -81,6 +82,7 @@ function generate_metrics_sheet(){
     pushd e2e-benchmarking/utils && source compare.sh
     # generate metrics sheet
     run_benchmark_comparison > "$ARTIFACT_DIR/benchmark_csv.log"
+    cp "/tmp/$WORKLOAD-$UUID/$UUID.csv" "$ARTIFACT_DIR/${UUID}_metrics.csv"
 }
 
 function update_sheet(){
@@ -92,6 +94,7 @@ function update_sheet(){
 
 function do_comparison(){
     pushd /tmp
+    rm -rf /tmp/$WORKLOAD-$UUID/$UUID.csv || true
     export TOLERANCE_LOC="/scripts/queries"
     export TOLERANCY_RULES="netobserv_touchstone_tolerancy_rules.yaml"
     export COMPARISON_CONFIG="netobserv_touchstone_tolerancy_config.json"
@@ -99,8 +102,9 @@ function do_comparison(){
     export GEN_CSV=true
     pushd e2e-benchmarking/utils && source compare.sh
     run_benchmark_comparison > "$ARTIFACT_DIR/benchmark_comp.log"
+    cp "/tmp/$WORKLOAD-$UUID/$UUID.csv" "$ARTIFACT_DIR/${UUID}_comparison.csv"
     # get the SHEET ID from the benchmark_comparison run logs
-    COMP_SHEET_ID=$(grep Google "$ARTIFACT_DIR/benchmark_comp.log" | awk '{print $6}')
+    COMP_SHEET_ID=$(grep Google "$ARTIFACT_DIR/benchmark_comp.log" | awk -F'/' '{print $NF}' | awk '{print $1}')
     update_sheet "$COMP_SHEET_ID"
 }
 
