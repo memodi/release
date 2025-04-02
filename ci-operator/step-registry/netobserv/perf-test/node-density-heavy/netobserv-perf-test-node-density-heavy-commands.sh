@@ -42,7 +42,6 @@ LATEST_TAG=$(curl -s "https://api.github.com/repos/cloud-bulldozer/e2e-benchmark
 TAG_OPTION="--branch $(if [ "$E2E_VERSION" == "default" ]; then echo "$LATEST_TAG"; else echo "$E2E_VERSION"; fi)";
 git clone $REPO_URL $TAG_OPTION --depth 1
 pushd e2e-benchmarking/workloads/kube-burner-ocp-wrapper
-export WORKLOAD=node-density-heavy
 
 # A non-indexed warmup run
 #ES_SERVER="" EXTRA_FLAGS="--pods-per-node=50  --pod-ready-threshold=2m" ./run.sh

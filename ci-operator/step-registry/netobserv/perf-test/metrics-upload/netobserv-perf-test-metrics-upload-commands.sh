@@ -4,15 +4,16 @@ set -o pipefail
 # disable nounset as e2e-benchmarking needs several variables to be set,
 # and we're selectively setting variables to get comparison sheets.
 set +o nounset
-set -x
-
 
 ES_USERNAME=$(cat /secret/username)
 ES_PASSWORD=$(cat /secret/password)
+
+set -x
+
 export ES_PASSWORD
 export ES_USERNAME
 export GSHEET_KEY_LOCATION="/ga-gsheet/gcp-sa-account"
-export EMAIL_ID_FOR_RESULTS_SHEET="memodi@redhat.com"
+export EMAIL_ID_FOR_RESULTS_SHEET="memodi@redhat.com" # change this to openshift-netobserv-team@redhat.com before merge
 NOO_BUNDLE_VERSION=$(jq '.noo_bundle_info' < "$SHARED_DIR/$WORKLOAD-index_data.json")
 export NOO_BUNDLE_VERSION=${NOO_BUNDLE_VERSION//\"/}
 
@@ -108,6 +109,7 @@ function do_comparison(){
         COMP_SHEET_ID=$(grep Google "$COMP_LOG" | awk -F'/' '{print $NF}' | awk '{print $1}')
         update_sheet "$COMP_SHEET_ID"
     fi
+    echo $comp_rc
 }
 
 upload_metrics
@@ -120,8 +122,9 @@ generate_metrics_sheet
 get_baseline
 
 if [[ -n $BASELINE_UUID ]]; then
-    do_comparison
-    if [[ $comp_rc -gt 0 ]]; then
+    # get the last value from output of do_comparison
+    comparison_rc=$(do_comparison | tail -n 1)
+    if [[ $comparison_rc -gt 0 ]]; then
         echo "Comparison with Baseline failed!!!"
     fi
 else
