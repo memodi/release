@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -o errexit
+
 set -o pipefail
 # disable nounset as e2e-benchmarking needs several variables to be set,
 # and we're selectively setting variables to get comparison sheets.
@@ -18,7 +18,7 @@ NOO_BUNDLE_VERSION="v0.0.0-main" #debug-only
 export NOO_BUNDLE_VERSION
 
 export UUID="d933e616-9d78-49d6-ab50-bdcec9be76c1"
-export BASELINE_UUID="e7844924-6ac6-453f-804c-b3934cde9643"
+# export BASELINE_UUID="e7844924-6ac6-453f-804c-b3934cde9643"
 
 # UUID=$(jq '.uuid' < "$SHARED_DIR/$WORKLOAD-index_data.json")
 # START_TIME=$(jq '.startDateUnixTimestamp' < "$SHARED_DIR/$WORKLOAD-index_data.json")
@@ -56,11 +56,14 @@ function install_requirements(){
 function upload_metrics(){
     install_requirements scripts/requirements.txt
     python scripts/nope.py --starttime "$START_TIME" --endtime "$END_TIME" --uuid "$UUID" --noo-bundle-version "$NOO_BUNDLE_VERSION"
+    upload_metrics_rc=$?
     cp -r /tmp/data "$ARTIFACT_DIR"
+    echo $upload_metrics_rc
 }
 
 function get_baseline(){
     pushd /scripts
+    install_requirements requirements.txt
     python nope.py baseline --fetch "$WORKLOAD"
     BASELINE_UUID=$(jq '.BASELINE_UUID' < /tmp/data/baseline.json)
     export BASELINE_UUID
@@ -101,15 +104,35 @@ function do_comparison(){
     export ES_SERVER_BASELINE="https://$ES_USERNAME:$ES_PASSWORD@search-ocp-qe-perf-scale-test-elk-hcm7wtsqpxy7xogbu72bor4uve.us-east-1.es.amazonaws.com"
     export GEN_CSV=true
     pushd e2e-benchmarking/utils && source compare.sh
-    run_benchmark_comparison > "$ARTIFACT_DIR/benchmark_comp.log"
+    COMP_LOG="$ARTIFACT_DIR/benchmark_comp.log"
+    run_benchmark_comparison > "$COMP_LOG"
+    comp_rc=$?
     cp "/tmp/$WORKLOAD-$UUID/$UUID.csv" "$ARTIFACT_DIR/${UUID}_comparison.csv"
     # get the SHEET ID from the benchmark_comparison run logs
-    COMP_SHEET_ID=$(grep Google "$ARTIFACT_DIR/benchmark_comp.log" | awk -F'/' '{print $NF}' | awk '{print $1}')
-    update_sheet "$COMP_SHEET_ID"
+    if [[ -f $COMP_LOG ]]; then
+        COMP_SHEET_ID=$(grep Google "$COMP_LOG" | awk -F'/' '{print $NF}' | awk '{print $1}')
+        update_sheet "$COMP_SHEET_ID"
+    fi
+    echo $comp_rc
 }
 
-# upload_metrics
+metrics_rc=$(upload_metrics)
+
+if [[ $metrics_rc -gt 0 ]]; then
+    echo "Metrics uploading to ES failed, exiting!!!"
+    return "$metrics_rc"
+fi
+
 generate_metrics_sheet
-# get_baseline
-do_comparison
-update_sheet
+get_baseline
+
+if [[ -n $BASELINE_UUID ]]; then
+    comparison_rc=$(do_comparison)
+    if [[ $comparison_rc -gt 0 ]]; then
+        echo "Comparison with Baseline failed!!!"
+    fi
+else
+    echo "Couldn't fetch baseline UUID for workload $WORKLOAD from ES"
+    return 1
+fi
+return "$comparison_rc"
