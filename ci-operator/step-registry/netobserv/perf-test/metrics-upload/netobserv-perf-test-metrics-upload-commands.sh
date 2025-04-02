@@ -62,15 +62,16 @@ function upload_metrics(){
 }
 
 function get_baseline(){
-    pushd /scripts
+    pushd /scripts || return
     install_requirements requirements.txt
     python nope.py baseline --fetch "$WORKLOAD"
     BASELINE_UUID=$(jq '.BASELINE_UUID' < /tmp/data/baseline.json)
+    BASELINE_UUID=${BASELINE_UUID//\"/}
     export BASELINE_UUID
 }
 
 function generate_metrics_sheet(){
-    pushd /tmp
+    pushd /tmp || return
     git clone -b master --depth=1 $E2E_BENCHMARKING_REPO_URL
     export CONFIG_LOC="/scripts/queries"
     export COMPARISON_CONFIG="netobserv_touchstone_statistics_config.json"
@@ -89,14 +90,14 @@ function generate_metrics_sheet(){
 }
 
 function update_sheet(){
-    pushd /scripts/sheets
+    pushd /scripts/sheets || return
     enable_venv
     install_requirements requirements.txt
     python noo_perfsheets_update.py --sheet-id "$1" --uuid1 "$UUID" --uuid2 "$BASELINE_UUID" --service-account "$GSHEET_KEY_LOCATION"
 }
 
 function do_comparison(){
-    pushd /tmp
+    pushd /tmp || return
     rm -rf /tmp/$WORKLOAD-$UUID/$UUID.csv || true
     export TOLERANCE_LOC="/scripts/queries"
     export TOLERANCY_RULES="netobserv_touchstone_tolerancy_rules.yaml"
