@@ -1,5 +1,5 @@
 chain:
-  as: openshift-e2e-test-netobserv-qe
+  as: openshift-e2e-test-netobserv
   env:
   - name: TEST_SCENARIOS
     default: Network_Observability
@@ -26,7 +26,7 @@ chain:
     default: ""
     documentation: Override the Network Observability CatalogSource image for z-stream testing.
   steps:
-  - ref: openshift-extended-test
+  - ref: netobserv-ginkgo-tests
   - ref: netobserv-frontend-tests
   - ref: openshift-e2e-test-qe-report
   documentation: |-
