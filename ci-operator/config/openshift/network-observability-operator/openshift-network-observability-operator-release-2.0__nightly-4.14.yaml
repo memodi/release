@@ -3,6 +3,10 @@ base_images:
     name: "4.14"
     namespace: ocp
     tag: cli
+  dev-scripts:
+    name: test
+    namespace: ocp-kni
+    tag: dev-scripts
   e2e-integration-tests-pf4:
     name: e2e-integration-tests-pf4
     namespace: netobserv
@@ -11,15 +15,17 @@ base_images:
     name: netobserv-operator
     namespace: netobserv
     tag: ci
-  dev-scripts:
-    name: test
-    namespace: ocp-kni
-    tag: dev-scripts
   upi-installer:
     name: "4.14"
     namespace: ocp
     tag: upi-installer
 releases:
+  arm64-latest:
+    candidate:
+      architecture: arm64
+      product: ocp
+      stream: nightly
+      version: "4.14"
   latest:
     candidate:
       product: ocp
@@ -31,8 +37,8 @@ resources:
       cpu: 100m
       memory: 200Mi
 tests:
-- always_run: false
-  as: aws-ipi-amd-f60-netobserv
+- as: netobserv-aws-ipi-amd-f60
+  cron: 14 7 3 2,4,6,8,10,12 *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -40,7 +46,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: aws-qe
     env:
@@ -49,8 +57,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf4
     workflow: cucushift-installer-rehearse-aws-ipi
-- always_run: false
-  as: aws-ipi-arm-f60-netobserv
+- as: netobserv-aws-ipi-arm-f60
+  cron: 32 15 6 1,3,5,7,9,11 *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -58,7 +66,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: aws-qe
     env:
@@ -68,10 +78,10 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf4
     workflow: cucushift-installer-rehearse-aws-ipi
-- always_run: false
-  as: metal-ds-ipi-ovn-dualstack-primaryv6-f360-ipv6-netobserv
+- as: netobserv-metal-ds-ipi-ovn-dualstack-primaryv6-f360-ipv6
   capabilities:
   - intranet
+  cron: 0 8 18 2 *
   steps:
     cluster_profile: equinix-ocp-metal-qe
     env:
@@ -80,18 +90,15 @@ tests:
         MIRROR_IMAGES=true
         INSTALLER_PROXY=true
         NETWORK_TYPE=OVNKubernetes
-      TEST_FILTERS: Network_Observability
-      TEST_IMPORTANCE: '.*'
-      TEST_SCENARIOS: "53844"
-      TEST_TIMEOUT: "55"
+      GINKGO_FOCUS_FILTER: "53844"
     test:
     - chain: openshift-e2e-test-netobserv-prepare-bm-cluster
     - chain: openshift-e2e-test-netobserv-pf4
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
-- always_run: false
-  as: metal-ds-ipi-ovn-ipv4-f360-virt-netobserv
+- as: netobserv-metal-ds-ipi-ovn-ipv4-f360-virt
   capabilities:
   - intranet
+  cron: 33 5 3 11 *
   steps:
     cluster_profile: equinix-ocp-metal-qe
     env:
@@ -100,16 +107,13 @@ tests:
         MIRROR_IMAGES=true
         INSTALLER_PROXY=true
         NETWORK_TYPE=OVNKubernetes
-      TEST_FILTERS: Network_Observability
-      TEST_IMPORTANCE: '.*'
-      TEST_SCENARIOS: with VMs
-      TEST_TIMEOUT: "55"
+      GINKGO_FOCUS_FILTER: with VMs
     test:
     - chain: openshift-e2e-test-netobserv-prepare-bm-cluster
     - chain: openshift-e2e-test-netobserv-pf4
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
 zz_generated_metadata:
-  branch: release-4.14
+  branch: release-2.0
   org: openshift
   repo: network-observability-operator
-  variant: periodics
+  variant: nightly-4.14

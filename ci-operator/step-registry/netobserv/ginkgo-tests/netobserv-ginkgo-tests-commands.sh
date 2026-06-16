@@ -44,6 +44,11 @@ if [[ -n "${GINKGO_LABEL_FILTER}" ]]; then
   echo "Using label filter: ${GINKGO_LABEL_FILTER}"
 fi
 
+if [[ -n "${GINKGO_FOCUS_FILTER}" ]]; then
+  FOCUS_FILTER_ARG="--focus=${GINKGO_FOCUS_FILTER}"
+  echo "Using focus filter: ${GINKGO_FOCUS_FILTER}"
+fi
+
 echo "====> Running ginkgo tests"
 ginkgo run \
   --timeout="${GINKGO_TIMEOUT}" \
@@ -51,6 +56,7 @@ ginkgo run \
   --keep-going \
   --junit-report=junit_netobserv_e2e.xml \
   --output-dir="${ARTIFACT_DIR}" \
+  ${FOCUS_FILTER_ARG:+"${FOCUS_FILTER_ARG}"} \
   ${FOCUS_FILE_ARG:+"${FOCUS_FILE_ARG}"} \
   ${LABEL_FILTER_ARG:+"${LABEL_FILTER_ARG}"} \
   ./e2e-tests.test

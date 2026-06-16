@@ -10,6 +10,9 @@ ref:
       memory: 256Mi
   timeout: 8h
   env:
+  - name: GINKGO_FOCUS_FILTER
+    default: ""
+    documentation: Ginkgo focus filter expression for test selection to be passed as string match to --focus ginkgo arg (e.g. --focus=Sanity).
   - name: GINKGO_LABEL_FILTER
     default: ""
     documentation: Ginkgo label filter expression for test selection (e.g. "smoke && !slow").
@@ -27,6 +30,11 @@ ref:
       Controls test execution behavior. "premerge" skips execution when no
       test files changed (for PR pre-merge jobs). "periodic" always runs
       all tests regardless of changed files (for periodic/nightly jobs).
+  - name: MULTISTAGE_PARAM_OVERRIDE_NETOBSERV_CS_IMAGE
+    default: ""
+    documentation: |-
+      Override the Network Observability CatalogSource image used by Cypress tests.
+      Useful for z-stream testing against a specific catalog image.
   documentation: |-
     Runs pre-compiled netobserv backend e2e tests using ginkgo from the
     e2etests image. Supports selective test execution via label filters or

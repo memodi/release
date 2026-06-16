@@ -917,6 +917,7 @@ cluster_profiles:
     - insights-operator
     - installer
     - local-storage-operator
+    - network-observability-operator
     - openshift-tests-private
     - release
     - rosa
@@ -1140,6 +1141,7 @@ cluster_profiles:
     - csi-operator
     - installer
     - multiarch-tuning-operator
+    - network-observability-operator
     - openshift-tests-private
     - release
     - sandboxed-containers-operator

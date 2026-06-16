@@ -3,6 +3,10 @@ base_images:
     name: "4.20"
     namespace: ocp
     tag: cli
+  dev-scripts:
+    name: test
+    namespace: ocp-kni
+    tag: dev-scripts
   e2e-integration-tests-pf5:
     name: e2e-integration-tests-pf5
     namespace: netobserv
@@ -11,15 +15,17 @@ base_images:
     name: netobserv-operator
     namespace: netobserv
     tag: ci
-  dev-scripts:
-    name: test
-    namespace: ocp-kni
-    tag: dev-scripts
   upi-installer:
     name: "4.20"
     namespace: ocp
     tag: upi-installer
 releases:
+  arm64-latest:
+    candidate:
+      architecture: arm64
+      product: ocp
+      stream: nightly
+      version: "4.20"
   latest:
     candidate:
       product: ocp
@@ -31,8 +37,8 @@ resources:
       cpu: 100m
       memory: 200Mi
 tests:
-- always_run: false
-  as: aws-ipi-amd-f14-netobserv
+- as: netobserv-aws-ipi-amd-f14
+  cron: 52 12 2,16 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -40,7 +46,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: aws-qe
     env:
@@ -49,8 +57,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-aws-ipi
-- always_run: false
-  as: aws-ipi-arm-f28-netobserv
+- as: netobserv-aws-ipi-arm-f28
+  cron: 22 6 13 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -58,7 +66,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: aws-qe
     env:
@@ -68,8 +78,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-aws-ipi
-- always_run: false
-  as: azure-ipi-amd-f14-netobserv
+- as: netobserv-azure-ipi-amd-f14
+  cron: 13 22 11,27 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -77,7 +87,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: azure-qe
     env:
@@ -86,8 +98,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-azure-ipi
-- always_run: false
-  as: gcp-ipi-amd-f14-netobserv
+- as: netobserv-gcp-ipi-amd-f14
+  cron: 36 8 9,25 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -95,7 +107,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: gcp-qe
     env:
@@ -103,10 +117,10 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-gcp-ipi
-- always_run: false
-  as: metal-ds-ipi-ovn-dualstack-primaryv6-f28-ipv6-netobserv
+- as: netobserv-metal-ds-ipi-ovn-dualstack-primaryv6-f28-ipv6
   capabilities:
   - intranet
+  cron: 11 9 2 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -114,7 +128,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: equinix-ocp-metal-qe
     env:
@@ -123,18 +139,15 @@ tests:
         MIRROR_IMAGES=true
         INSTALLER_PROXY=true
         NETWORK_TYPE=OVNKubernetes
-      TEST_FILTERS: Network_Observability
-      TEST_IMPORTANCE: '.*'
-      TEST_SCENARIOS: "53844"
-      TEST_TIMEOUT: "55"
+      GINKGO_FOCUS_FILTER: "53844"
     test:
     - chain: openshift-e2e-test-netobserv-prepare-bm-cluster
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
-- always_run: false
-  as: metal-ds-ipi-ovn-ipv4-f28-virt-netobserv
+- as: netobserv-metal-ds-ipi-ovn-ipv4-f28-virt
   capabilities:
   - intranet
+  cron: 55 14 5 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -142,7 +155,9 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: equinix-ocp-metal-qe
     env:
@@ -151,16 +166,13 @@ tests:
         MIRROR_IMAGES=true
         INSTALLER_PROXY=true
         NETWORK_TYPE=OVNKubernetes
-      TEST_FILTERS: Network_Observability
-      TEST_IMPORTANCE: '.*'
-      TEST_SCENARIOS: with VMs
-      TEST_TIMEOUT: "55"
+      GINKGO_FOCUS_FILTER: with VMs
     test:
     - chain: openshift-e2e-test-netobserv-prepare-bm-cluster
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
-- always_run: false
-  as: vsphere-ipi-amd-f14-netobserv
+- as: netobserv-vsphere-ipi-amd-f14
+  cron: 34 1 4,18 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -168,14 +180,16 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: vsphere-elastic
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-vsphere-ipi
-- always_run: false
-  as: vsphere-ipi-amd-f28-ipsec-netobserv
+- as: netobserv-vsphere-ipi-amd-f28-ipsec
+  cron: 46 2 22 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -183,19 +197,18 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: vsphere-elastic
     env:
-      TEST_FILTERS: Network_Observability
-      TEST_IMPORTANCE: '.*'
-      TEST_SCENARIOS: "82637"
-      TEST_TIMEOUT: "55"
+      GINKGO_FOCUS_FILTER: "82637"
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-vsphere-ipi-ovn-ipsec
-- always_run: false
-  as: vsphere-ipi-amd-f28-techpreview-nwevents-netobserv
+- as: netobserv-vsphere-ipi-amd-f28-techpreview-nwevents
+  cron: 18 0 13 * *
   reporter_config:
     channel: '#team-qe-netobserv'
     job_states_to_report:
@@ -203,20 +216,19 @@ tests:
     - error
     - failure
     - success
-    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{ else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*. <{{.Status.URL}}|View logs>'
+    report_template: '{{ if eq .Status.State "success" }} :green_jenkins_circle: {{
+      else }} :red_jenkins_circle: {{ end }} Job *{{.Spec.Job}}* ended with *{{.Status.State}}*.
+      <{{.Status.URL}}|View logs>'
   steps:
     cluster_profile: vsphere-elastic
     env:
       FEATURE_SET: TechPreviewNoUpgrade
-      TEST_FILTERS: Network_Observability
-      TEST_IMPORTANCE: '.*'
-      TEST_SCENARIOS: "77894"
-      TEST_TIMEOUT: "55"
+      GINKGO_FOCUS_FILTER: "77894"
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-vsphere-ipi
 zz_generated_metadata:
-  branch: release-4.20
+  branch: release-2.0
   org: openshift
   repo: network-observability-operator
-  variant: periodics
+  variant: nightly-4.20
