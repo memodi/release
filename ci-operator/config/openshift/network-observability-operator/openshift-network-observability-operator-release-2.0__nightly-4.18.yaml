@@ -12,7 +12,7 @@ base_images:
     namespace: netobserv
     tag: ci
   e2etests:
-    name: netobserv-operator
+    name: e2etests
     namespace: netobserv
     tag: ci
   upi-installer:
