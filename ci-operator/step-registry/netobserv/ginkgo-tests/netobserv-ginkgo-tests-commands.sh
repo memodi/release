@@ -7,6 +7,14 @@ if [[ -f "${SHARED_DIR}/kubeadmin-password" ]]; then
 fi
 
 set -exuo pipefail
+
+binhome=$(mktemp -d)
+if ! which kubectl; then
+  ln -s "$(which oc)" "${binhome}/kubectl"
+fi
+
+export PATH="${binhome}:${PATH}"
+
 echo "====> Starting netobserv ginkgo e2e tests"
 echo "====> TEST_RUN_MODE: ${TEST_RUN_MODE}"
 
