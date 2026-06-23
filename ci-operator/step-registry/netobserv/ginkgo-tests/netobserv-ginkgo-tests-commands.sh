@@ -58,11 +58,15 @@ if [[ -n "${GINKGO_FOCUS_FILTER}" ]]; then
 fi
 
 echo "====> Running ginkgo tests"
+# JUNIT_REPORT_FILE is used instead of --junit-report so the test binary can write
+# a filtered JUnit XML containing only sig-netobserv specs (via ReportAfterSuite hook).
+# Using --junit-report would cause ginkgo to overwrite our filtered output with the full
+# unfiltered report (all 7000+ upstream specs) after our hook runs.
+export JUNIT_REPORT_FILE="${ARTIFACT_DIR}/junit_netobserv_e2e.xml"
 ginkgo run \
   --timeout="${GINKGO_TIMEOUT}" \
   --v \
   --keep-going \
-  --junit-report=junit_netobserv_e2e.xml \
   --output-dir="${ARTIFACT_DIR}" \
   ${FOCUS_FILTER_ARG:+"${FOCUS_FILTER_ARG}"} \
   ${FOCUS_FILE_ARG:+"${FOCUS_FILE_ARG}"} \
