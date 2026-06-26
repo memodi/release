@@ -20,6 +20,7 @@ echo "====> TEST_RUN_MODE: ${TEST_RUN_MODE}"
 
 FOCUS_FILE_ARG=""
 LABEL_FILTER_ARG=""
+SKIP_FILTER_ARG=""
 
 if [[ -n "${GINKGO_FOCUS_FILE}" ]]; then
   FOCUS_FILE_ARG="--focus-file=${GINKGO_FOCUS_FILE}"
@@ -57,6 +58,11 @@ if [[ -n "${GINKGO_FOCUS_FILTER}" ]]; then
   echo "Using focus filter: ${GINKGO_FOCUS_FILTER}"
 fi
 
+if [[ -n "${GINKGO_SKIP_FILTER}" ]]; then
+  SKIP_FILTER_ARG="--skip=${GINKGO_SKIP_FILTER}"
+  echo "Using skip filter: ${GINKGO_SKIP_FILTER}"
+fi
+
 echo "====> Running ginkgo tests"
 # JUNIT_REPORT_FILE is used instead of --junit-report so the test binary can write
 # a filtered JUnit XML containing only sig-netobserv specs (via ReportAfterSuite hook).
@@ -71,6 +77,7 @@ ginkgo run \
   ${FOCUS_FILTER_ARG:+"${FOCUS_FILTER_ARG}"} \
   ${FOCUS_FILE_ARG:+"${FOCUS_FILE_ARG}"} \
   ${LABEL_FILTER_ARG:+"${LABEL_FILTER_ARG}"} \
+  ${SKIP_FILTER_ARG:+"${SKIP_FILTER_ARG}"} \
   ./e2e-tests.test
 
 echo "====> Tests completed successfully"
