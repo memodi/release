@@ -38,7 +38,6 @@ resources:
       memory: 200Mi
 tests:
 - as: netobserv-aws-ipi-amd-f14
-  timeout: 10h0m0s
   cron: 26 14 2,18 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -58,8 +57,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-aws-ipi
-- as: netobserv-aws-ipi-arm-f28
   timeout: 10h0m0s
+- as: netobserv-aws-ipi-arm-f28
   cron: 36 16 8 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -80,8 +79,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-aws-ipi
-- as: netobserv-azure-ipi-amd-f14
   timeout: 10h0m0s
+- as: netobserv-azure-ipi-amd-f14
   cron: 19 3 5,21 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -101,8 +100,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-azure-ipi
-- as: netobserv-gcp-ipi-amd-f14
   timeout: 10h0m0s
+- as: netobserv-gcp-ipi-amd-f14
   cron: 38 11 5,19 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -121,8 +120,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-gcp-ipi
-- as: netobserv-metal-ds-ipi-ovn-dualstack-primaryv6-f28-ipv6
   timeout: 10h0m0s
+- as: netobserv-metal-ds-ipi-ovn-dualstack-primaryv6-f28-ipv6
   capabilities:
   - intranet
   cron: 4 18 20 * *
@@ -149,8 +148,8 @@ tests:
     - chain: openshift-e2e-test-netobserv-prepare-bm-cluster
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
-- as: netobserv-metal-ds-ipi-ovn-ipv4-f28-virt
   timeout: 10h0m0s
+- as: netobserv-metal-ds-ipi-ovn-ipv4-f28-virt
   capabilities:
   - intranet
   cron: 57 22 8 * *
@@ -177,8 +176,8 @@ tests:
     - chain: openshift-e2e-test-netobserv-prepare-bm-cluster
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
-- as: netobserv-vsphere-ipi-amd-f14
   timeout: 10h0m0s
+- as: netobserv-vsphere-ipi-amd-f14
   cron: 27 17 9,23 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -195,8 +194,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-vsphere-ipi
-- as: netobserv-vsphere-ipi-amd-f28-ipsec
   timeout: 10h0m0s
+- as: netobserv-vsphere-ipi-amd-f28-ipsec
   cron: 25 6 23 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -215,8 +214,8 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-vsphere-ipi-ovn-ipsec
-- as: netobserv-vsphere-ipi-amd-f28-techpreview-nwevents
   timeout: 10h0m0s
+- as: netobserv-vsphere-ipi-amd-f28-techpreview-nwevents
   cron: 41 15 13 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -236,6 +235,7 @@ tests:
     test:
     - chain: openshift-e2e-test-netobserv-pf5
     workflow: cucushift-installer-rehearse-vsphere-ipi
+  timeout: 10h0m0s
 zz_generated_metadata:
   branch: release-2.0
   org: openshift
