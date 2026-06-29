@@ -1384,6 +1384,7 @@ cluster_profiles:
     - gcp-pd-csi-driver
     - gcp-pd-csi-driver-operator
     - installer
+    - network-observability-operator
     - openshift-tests-private
     - release
     - verification-tests
