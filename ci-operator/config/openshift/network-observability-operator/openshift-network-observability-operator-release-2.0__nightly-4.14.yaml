@@ -38,6 +38,7 @@ resources:
       memory: 200Mi
 tests:
 - as: netobserv-aws-ipi-amd-f60
+  timeout: 10h0m0s
   cron: 14 7 3 2,4,6,8,10,12 *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -58,6 +59,7 @@ tests:
     - chain: openshift-e2e-test-netobserv-pf4
     workflow: cucushift-installer-rehearse-aws-ipi
 - as: netobserv-aws-ipi-arm-f60
+  timeout: 10h0m0s
   cron: 32 15 6 1,3,5,7,9,11 *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -79,6 +81,7 @@ tests:
     - chain: openshift-e2e-test-netobserv-pf4
     workflow: cucushift-installer-rehearse-aws-ipi
 - as: netobserv-metal-ds-ipi-ovn-dualstack-primaryv6-f360-ipv6
+  timeout: 10h0m0s
   capabilities:
   - intranet
   cron: 0 8 18 2 *
@@ -96,6 +99,7 @@ tests:
     - chain: openshift-e2e-test-netobserv-pf4
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
 - as: netobserv-metal-ds-ipi-ovn-ipv4-f360-virt
+  timeout: 10h0m0s
   capabilities:
   - intranet
   cron: 33 5 3 11 *

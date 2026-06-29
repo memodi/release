@@ -38,6 +38,7 @@ resources:
       memory: 200Mi
 tests:
 - as: netobserv-aws-ipi-amd-f7
+  timeout: 10h0m0s
   cron: 7 19 5,12,19,26 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -58,6 +59,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-aws-ipi
 - as: netobserv-aws-ipi-arm-f28
+  timeout: 10h0m0s
   cron: 2 13 19 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -79,6 +81,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-aws-ipi
 - as: netobserv-azure-ipi-amd-f7
+  timeout: 10h0m0s
   cron: 25 17 1,8,15,24 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -99,6 +102,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-azure-ipi
 - as: netobserv-gcp-ipi-amd-f7
+  timeout: 10h0m0s
   cron: 33 17 6,13,20,29 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -118,6 +122,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-gcp-ipi
 - as: netobserv-metal-ds-ipi-ovn-dualstack-primaryv6-f28-ipv6
+  timeout: 10h0m0s
   capabilities:
   - intranet
   cron: 4 7 28 * *
@@ -145,6 +150,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
 - as: netobserv-metal-ds-ipi-ovn-ipv4-f28-virt
+  timeout: 10h0m0s
   capabilities:
   - intranet
   cron: 26 4 21 * *
@@ -172,6 +178,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-baremetalds-ipi-ovn
 - as: netobserv-vsphere-ipi-amd-f28-ipsec
+  timeout: 10h0m0s
   cron: 17 8 25 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -191,6 +198,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-vsphere-ipi-ovn-ipsec
 - as: netobserv-vsphere-ipi-amd-f28-techpreview-nwevents
+  timeout: 10h0m0s
   cron: 59 16 20 * *
   reporter_config:
     channel: '#team-qe-netobserv'
@@ -211,6 +219,7 @@ tests:
     - chain: openshift-e2e-test-netobserv
     workflow: cucushift-installer-rehearse-vsphere-ipi
 - as: netobserv-vsphere-ipi-amd-f7
+  timeout: 10h0m0s
   cron: 45 3 7,16,23,30 * *
   reporter_config:
     channel: '#team-qe-netobserv'
