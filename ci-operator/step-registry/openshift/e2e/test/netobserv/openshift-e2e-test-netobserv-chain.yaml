@@ -3,6 +3,6 @@ chain:
   steps:
   - ref: netobserv-ginkgo-tests
   - ref: netobserv-frontend-tests
-  - ref: openshift-e2e-test-qe-report
+  - ref: netobserv-evaluate-failures
   documentation: |-
     Execute e2e tests for Network Observability, including golang and Cypress frontend tests.

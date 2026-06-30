@@ -69,6 +69,7 @@ echo "====> Running ginkgo tests"
 # Using --junit-report would cause ginkgo to overwrite our filtered output with the full
 # unfiltered report (all 7000+ upstream specs) after our hook runs.
 export JUNIT_REPORT_FILE="${ARTIFACT_DIR}/junit_netobserv_e2e.xml"
+GINKGO_EXIT=0
 ginkgo run \
   --timeout="${GINKGO_TIMEOUT}" \
   --v \
@@ -78,6 +79,11 @@ ginkgo run \
   ${FOCUS_FILE_ARG:+"${FOCUS_FILE_ARG}"} \
   ${LABEL_FILTER_ARG:+"${LABEL_FILTER_ARG}"} \
   ${SKIP_FILTER_ARG:+"${SKIP_FILTER_ARG}"} \
-  ./e2e-tests.test
+  ./e2e-tests.test || GINKGO_EXIT=$?
 
-echo "====> Tests completed successfully"
+if [[ "${GINKGO_EXIT}" -ne 0 ]]; then
+  echo "ginkgo-tests failed with exit code ${GINKGO_EXIT}" >> "${SHARED_DIR}/netobserv-step-failures"
+  echo "====> Tests completed with failures (exit ${GINKGO_EXIT}), continuing to next step"
+else
+  echo "====> Tests completed successfully"
+fi

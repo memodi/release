@@ -3,6 +3,6 @@ chain:
   steps:
   - ref: netobserv-ginkgo-tests
   - ref: netobserv-frontend-tests-pf5
-  - ref: openshift-e2e-test-qe-report
+  - ref: netobserv-evaluate-failures
   documentation: |-
     Execute e2e tests for Network Observability using PF5 frontend test image (OCP 4.16-4.21).

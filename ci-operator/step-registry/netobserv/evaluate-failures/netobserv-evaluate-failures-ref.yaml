@@ -1,0 +1,8 @@
+ref:
+  as: netobserv-evaluate-failures
+  commands: netobserv-evaluate-failures-commands.sh
+  documentation: |-
+    Evaluates aggregated step failures recorded in ${SHARED_DIR}/netobserv-step-failures.
+    Exits non-zero if any preceding test steps recorded a failure, ensuring the overall
+    job correctly reports failure status even when individual steps exited 0 to allow
+    subsequent steps to run.
