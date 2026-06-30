@@ -1,4 +1,5 @@
 ref:
+  from: e2etests
   as: netobserv-evaluate-failures
   commands: netobserv-evaluate-failures-commands.sh
   documentation: |-
